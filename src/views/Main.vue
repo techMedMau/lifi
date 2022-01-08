@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+     <Lightbox v-show="showLightbox" :id="detailId" @closeLightbox="showLightbox = false" @deleteItem="deleteInvoice"/>
     <header class="header">
      <div class="img_outer">
       <img class="img_resp" src="@/assets/images/LOGO.png" alt="logo" width="167" height="41"/>
@@ -11,7 +12,7 @@
         <p class="info_overall">共{{totalItems}}張,總金額{{totalExpense}}元</p>
       </div>
       <div>
-        <invoice @click.native="getDetail(item.id)" v-for="item in invoices" :key="item.id" :invoice="item"/>
+        <invoice @click.native="getInvoice(item.id)" v-for="item in invoices" :key="item.id" :invoice="item"/>
       </div>
     </main>
     <!-- <button @click="test">test</button> -->
@@ -30,15 +31,16 @@
 
 <script>
 import Invoice from '../components/InvoiceItem.vue'
-import InputBlock from './InputBlock.vue'
+import Lightbox from '../components/Lightbox.vue'
 
 export default {
   name: 'Main',
-  components: { Invoice, InputBlock },
+  components: { Invoice, Lightbox },
   data(){
     return{
       invoices: null,
-      detail: null,
+      detailId: null,
+      showLightbox:false,
     }
   },
   created(){
@@ -63,22 +65,13 @@ export default {
     test(id){
       console.log(id)
     },
-    async getDetail(id){
-      try {
-        let data = await fetch(`http://localhost:3000/invoices/${id}`)
-        if(!data.ok){
-            throw Error('no data available')
-        }
-        console.log(await data.json())
-
-      } catch (err) {
-        console.log(err.message)
-      }
+    getInvoice(id){
+      this.detailId = id
+      this.showLightbox = true
+    },
+    deleteInvoice(){
+      this.load()
     }
-  },
-  mounted(){
-  },
-  watch: {
   },
   computed: {
     month(){
