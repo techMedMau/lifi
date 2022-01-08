@@ -9,6 +9,11 @@ export default new Router({
       path: '/',
       name: 'Main',
       component: () => import('@/views/Main.vue')
+    },
+    {
+      path: '/create',
+      name: 'InputBlock',
+      component: () => import('@/views/InputBlock.vue')
     }
   ]
 })

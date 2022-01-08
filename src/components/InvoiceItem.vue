@@ -24,7 +24,7 @@ export default {
       required: true,
     }
   },
-  name: 'Invoice',
+  name: 'InvoiceItem',
   data(){
     return {
 
@@ -50,12 +50,17 @@ export default {
 
 <style lang="scss">
 .invoice{
+  border-top: 1px solid #E0E0E0;
+  border-bottom: 1px solid #E0E0E0;
   height: max-content;
   width: 100%;
   background-color: white;
   padding: 12px 10px 13px 8px;
   display: flex;
   justify-content: space-between;
+  & + & {
+    border-top: 0;
+  }
   & p {
     margin: 0;
   }

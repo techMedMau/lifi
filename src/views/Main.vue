@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div class="container">
     <header class="header">
      <div class="img_outer">
       <img class="img_resp" src="@/assets/images/LOGO.png" alt="logo" width="167" height="41"/>
      </div>
     </header>
-    <main>
+    <main class="main">
       <div class="info">
         <h3 class="info_date">{{year}}年{{month}}月</h3>
         <p class="info_overall">共{{totalItems}}張,總金額{{totalExpense}}元</p>
@@ -14,22 +14,27 @@
         <invoice v-for="item in invoices" :key="item.id" :invoice="item"/>
       </div>
     </main>
-    <button @click="test">test</button>
-    <nav class="nav">
+    <!-- <button @click="test">test</button> -->
+    <nav class="nav container">
       <ul class="nav_items">
         <li class="nav_item"><button class="nav_item_btn" type="button">掃描輸入</button></li>
-        <li class="nav_item"><button class="nav_item_btn" type="button" @click="showInput = ! showInput">手輸發票</button></li>
+        <li class="nav_item">
+          <button class="nav_item_btn" type="button">
+            <router-link class="nav_item_btn" to="/create">手輸發票</router-link>
+          </button>
+        </li>
       </ul>
     </nav>
   </div>
 </template>
 
 <script>
-import Invoice from '../components/invoice.vue'
+import Invoice from '../components/InvoiceItem.vue'
+import InputBlock from './InputBlock.vue'
 
 export default {
   name: 'Main',
-  components: { Invoice },
+  components: { Invoice, InputBlock },
   data(){
     return{
       invoices: null,
@@ -94,6 +99,7 @@ export default {
 </script>
 
 <style lang="scss">
+
 .header{
   width: 100%;
   height: 120px;
@@ -134,11 +140,11 @@ export default {
 }
 
 .nav{
-  position: absolute;
+  box-shadow: 0px -1px 0px #E0E0E0;
+  position: fixed;
   background-color: white;
-  left: 0;
   bottom: 0;
-  width: 100%;
+  // width: 900px;
   &_items{
     display: flex;
     height: 59px;
@@ -156,5 +162,8 @@ export default {
       color: #5A5A78
     }
   }
+}
+.main{
+  margin-bottom: 59px;
 }
 </style>

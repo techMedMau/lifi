@@ -22,8 +22,8 @@ ul{
   padding: 0;
 }
 
-body{
-  background-color: #F5F5F5;
+a{
+ text-decoration: none;
 }
 
 button{
@@ -31,6 +31,10 @@ button{
   background-color: transparent;
 }
 
+.container{
+  width: 900px;
+  margin: 0 auto;
+}
 // #app {
 //   font-family: 'Avenir', Helvetica, Arial, sans-serif;
 //   -webkit-font-smoothing: antialiased;
