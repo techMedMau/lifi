@@ -11,7 +11,7 @@
         <p class="info_overall">共{{totalItems}}張,總金額{{totalExpense}}元</p>
       </div>
       <div>
-        <invoice v-for="item in invoices" :key="item.id" :invoice="item"/>
+        <invoice @click.native="getDetail(item.id)" v-for="item in invoices" :key="item.id" :invoice="item"/>
       </div>
     </main>
     <!-- <button @click="test">test</button> -->
@@ -38,8 +38,7 @@ export default {
   data(){
     return{
       invoices: null,
-      try: new Array(1200),
-      showInput: false
+      detail: null,
     }
   },
   created(){
@@ -53,12 +52,28 @@ export default {
             throw Error('no data available')
         }
         this.invoices = await data.json()
+        this.invoices.sort((a, b)=>{
+          return Date.parse(b.time) - Date.parse(a.time)
+        })
+        this.$store.dispatch('getInitialId', this.invoices[0].id)
       } catch (err) {
         console.log(err.message)
       }
     },
-    test(){
+    test(id){
+      console.log(id)
+    },
+    async getDetail(id){
+      try {
+        let data = await fetch(`http://localhost:3000/invoices/${id}`)
+        if(!data.ok){
+            throw Error('no data available')
+        }
+        console.log(await data.json())
 
+      } catch (err) {
+        console.log(err.message)
+      }
     }
   },
   mounted(){

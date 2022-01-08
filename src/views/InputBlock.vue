@@ -8,19 +8,19 @@
       <div>
         <p>發票號碼</p>
         <div class="inputBlock_form_num">
-          <input class="w110" type="text" placeholder="大寫英文" oninput="value=value.replace(/[^A-Z]/g,'')" maxlength="2">
-          <input class="w200" type="text" placeholder="8碼發票號碼" oninput="value=value.replace(/[^\d]/g,'')" maxlength="8">
+          <input v-model="invNumEng" class="w110" type="text" placeholder="大寫英文" oninput="value=value.replace(/[^A-Z]/g,'')" maxlength="2">
+          <input v-model="invNumNum" class="w200" type="text" placeholder="8碼發票號碼" oninput="value=value.replace(/[^\d]/g,'')" maxlength="8">
         </div>
       </div>
       <div>
         <p>開立時間</p>
         <div class="inputBlock_form_date">
-          <input class="w110" type="text" placeholder="西元年" oninput="value=value.replace(/[^\d]/g,'')" maxlength="4"/>
-          <input class="w95" type="text" placeholder="月份" oninput="value=value.replace(/[^\d]/g,'')" maxlength="2"/>
-          <input class="w95" type="text" placeholder="日期" oninput="value=value.replace(/[^\d]/g,'')" maxlength="2"/>
+          <input v-model="year" class="w110" type="text" placeholder="西元年" oninput="value=value.replace(/[^\d]/g,'')" maxlength="4"/>
+          <input v-model="month" class="w95" type="text" placeholder="月份" oninput="value=value.replace(/[^\d]/g,'')" maxlength="2"/>
+          <input v-model="day" class="w95" type="text" placeholder="日期" oninput="value=value.replace(/[^\d]/g,'')" maxlength="2"/>
         </div>
       </div>
-     <button class="inputBlock_form_submit" type="button" >提交</button>
+     <button class="inputBlock_form_submit" type="button" @click="createNewInvoice">提交</button>
     </div>
   </div>
 </template>
@@ -31,33 +31,37 @@ export default {
   name: 'InputBlock',
   data(){
     return {
-      newData: {
-        "id": 6245879,
-        "invNum": "QU69378153",
-        "status": "驗證中",
-        "time": "2021-12-11 00:00:00",
-        "type": 1
-      }
+      year: '',
+      month: '',
+      day: '',
+      invNumEng: '',
+      invNumNum: '',
     }
-  },
-  created(){
-    axios.get('http://localhost:3000/invoices').then((res)=>{
-      console.log(Date.parse(res.data[0].time.split(' ')[0]))
-      console.log(Date.parse(res.data[1].time.split(' ')[0]))
-      console.log(Date.parse(res.data[2].time.split(' ')[0]))
-    }).catch((err)=> {
-      console.log(err)
-    })
   },
   methods:{
     test(){
+    },
+    resetInputs(){
+      this.year = ''
+      this.month = ''
+      this.day = ''
+      this.invNumEng = ''
+      this.invNumNum = ''
+    },
+    createNewInvoice(){
       axios.post('http://localhost:3000/invoices', {
-        id: 2,
-        title: 'hell0',
-        author: 'Debby'
+        "id": this.$store.state.id,
+        "invNum": this.invNumEng+this.invNumNum,
+        "status": "驗證中",
+        "time": this.year+"-"+this.month+"-"+this.day+" 00:00:00",
+        "type": 1
       })
       .then(res => {
         console.log(res.data);
+        this.resetInputs();
+      })
+      .catch(err => {
+        console.log(err)
       })
     }
   }
