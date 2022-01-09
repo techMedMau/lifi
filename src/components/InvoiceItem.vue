@@ -25,14 +25,6 @@ export default {
     }
   },
   name: 'InvoiceItem',
-  data(){
-    return {
-
-    }
-  },
-  mounted(){
-    // console.log(this.invoice)
-  },
   computed:{
     date(){
       return this.invoice.time.split('-')[1]+'/'+this.invoice.time.substring(8,10)

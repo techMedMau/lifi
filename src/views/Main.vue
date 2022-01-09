@@ -15,7 +15,6 @@
         <invoice @click.native="getInvoice(item.id)" v-for="item in invoices" :key="item.id" :invoice="item"/>
       </div>
     </main>
-    <!-- <button @click="test">test</button> -->
     <nav class="nav container">
       <ul class="nav_items">
         <li class="nav_item"><button class="nav_item_btn" type="button">掃描輸入</button></li>
@@ -62,9 +61,6 @@ export default {
         console.log(err.message)
       }
     },
-    test(id){
-      console.log(id)
-    },
     getInvoice(id){
       this.detailId = id
       this.showLightbox = true
@@ -107,7 +103,6 @@ export default {
 </script>
 
 <style lang="scss">
-
 .header{
   width: 100%;
   height: 120px;
@@ -152,7 +147,6 @@ export default {
   position: fixed;
   background-color: white;
   bottom: 0;
-  // width: 900px;
   &_items{
     display: flex;
     height: 59px;
@@ -173,9 +167,5 @@ export default {
 }
 .main{
   margin-bottom: 59px;
-}
-
-@media screen and (max-width: 480px) and (min-width: 320px) {
-  
 }
 </style>
