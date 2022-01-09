@@ -39,8 +39,6 @@ export default {
     }
   },
   methods:{
-    test(){
-    },
     resetInputs(){
       this.year = ''
       this.month = ''
@@ -49,6 +47,12 @@ export default {
       this.invNumNum = ''
     },
     createNewInvoice(){
+      const date = new Date
+      const inputDate = Date.parse(`${this.year}-${this.month}-${this.day}`)
+      if(inputDate > date.getTime() || this.month*1 > 12 || this.day*1 > 31){
+        alert('日期輸入有誤')
+        return
+      }
       axios.post('http://localhost:3000/invoices', {
         "id": this.$store.state.id,
         "invNum": this.invNumEng+this.invNumNum,

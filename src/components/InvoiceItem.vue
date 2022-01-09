@@ -82,15 +82,14 @@ export default {
     color: #5A5A78;
     text-align: center;
   }
-  &_tag{
-    font-size: 10px;
-    line-height: 15px;
-    text-align: center;
-    border-radius: 8px;
-    // align-items: center;
-    width: 36px;
-    height: 16px;
-  }
+  // &_tag{
+  //   font-size: 10px;
+  //   line-height: 15px;
+  //   text-align: center;
+  //   border-radius: 8px;
+  //   width: 36px;
+  //   height: 16px;
+  // }
   &_product{
     &_display{
       color: #37375A;

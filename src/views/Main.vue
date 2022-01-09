@@ -174,4 +174,8 @@ export default {
 .main{
   margin-bottom: 59px;
 }
+
+@media screen and (max-width: 480px) and (min-width: 320px) {
+  
+}
 </style>

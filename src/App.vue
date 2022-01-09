@@ -42,4 +42,13 @@ button{
 //   text-align: center;
 //   color: #2c3e50;
 // }
+
+.invoice_tag{
+  font-size: 10px;
+  line-height: 15px;
+  text-align: center;
+  border-radius: 8px;
+  width: 36px;
+  height: 16px;
+}
 </style>

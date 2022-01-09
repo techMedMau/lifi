@@ -2,6 +2,7 @@
   <div class="lightbox" v-if="detail">
     <button type="button" class="lightbox_close" @click="close">✕</button>
     <div class="lightbox_card">
+      <div class="invoice_tag card_tag" :style="{'background-color': detail.status==='驗證中'?'#FF5C5C':'#FFCE33', 'color': detail.status==='驗證中'?'white':'#37375A'}">{{detail.status==='驗證中'? '驗證中':detail.type === 1? '載具':'電子'}}</div>
       <div class="lightbox_card_titleBlock">
         <p class="lightbox_card_invNum">{{detail.invNum}}</p>
         <p class="lightbox_card_time">{{detail.time}}</p>
@@ -88,6 +89,7 @@ export default {
             throw Error('no data available')
         }
         this.detail = await data.json()
+        console.log(detail)
       } catch (err) {
         console.log(err.message)
       }
@@ -145,7 +147,7 @@ export default {
     background-color: white;
     border-radius: 20px;
     &_titleBlock{
-      padding: 10px;
+      // padding: 10px;
       text-align: center;
     }
     &_invNum{
@@ -233,6 +235,15 @@ export default {
   &_img{
     margin-right: 2px;
   }
+}
+
+.card_tag{
+  position: absolute;
+  width: 36px;
+  height: 16px;
+  left: 17px;
+  top: 17px;
+
 }
 
 </style>
