@@ -2,9 +2,12 @@
 
 > Lifi homework
 
-## Build Setup
+## Run the project in local enviroment
 
 ``` bash
+# to checj if Node is installed
+node -v
+
 # install dependencies
 npm install
 
@@ -15,4 +18,3 @@ npm start
 npx json-server --watch data/db.json
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
